@@ -1,0 +1,86 @@
+:root {
+  --bg: #f4f1ec;
+  --card: #ffffff;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --line: #d9d4cb;
+  --accent: #1f5f4a;
+  --accent-text: #ffffff;
+  --danger: #b42318;
+  --warn: #92400e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 16px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.45;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+h1 { margin: 0 0 4px; font-size: 1.4rem; }
+h2 { margin: 0 0 8px; font-size: 1.15rem; }
+
+.muted { color: var(--muted); margin: 0; font-size: 0.9rem; }
+.title { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
+.customer { margin: 20px 0 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+
+label { display: block; margin: 14px 0 4px; font-size: 0.9rem; }
+
+input[type="text"],
+input[type="password"],
+input[type="tel"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+fieldset { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px 14px; margin: 0 0 8px; }
+legend { padding: 0 6px; font-size: 0.9rem; color: var(--muted); }
+
+.phone-option { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; padding: 0; font-size: 1rem; }
+.phone-option input { margin-top: 5px; }
+.phone-option small { display: block; color: var(--muted); }
+
+.checkbox { display: flex; align-items: flex-start; gap: 10px; margin: 14px 0; }
+.checkbox input { margin-top: 4px; }
+
+button {
+  font: inherit;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); width: 100%; margin-top: 8px; font-size: 1.05rem; }
+button.danger { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+.row { display: flex; gap: 10px; }
+.row button { flex: 1; }
+
+.status { min-height: 1.4em; margin: 12px 0 0; }
+.hint { color: var(--warn); font-size: 0.9rem; margin: 6px 0 0; }
+.error { color: var(--danger); margin: 10px 0 0; }
+.timer { font-size: 2rem; text-align: center; margin: 16px 0 8px; font-variant-numeric: tabular-nums; }
+
+[hidden] { display: none !important; }

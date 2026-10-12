@@ -1,0 +1,7 @@
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self' blob:; style-src 'self'; img-src 'self' data:; connect-src 'self' https://n8n.cocolotravel.com https://*.twilio.com wss://*.twilio.com; media-src 'self' blob: data:; worker-src 'self' blob:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Permissions-Policy: microphone=(self), camera=(), geolocation=()
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=31536000
+  X-Robots-Tag: noindex, nofollow
