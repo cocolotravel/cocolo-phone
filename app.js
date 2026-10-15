@@ -239,7 +239,7 @@
         return api('/softphone-token');
       })
       .then(function (data) {
-        device = new Twilio.Device(data.token, { codecPreferences: ['opus', 'pcmu'], closeProtection: true, logLevel: 'error' });
+        device = new Twilio.Device(data.token, { codecPreferences: ['opus', 'pcmu'], closeProtection: true, logLevel: 'error', enableImprovedSignalingErrorPrecision: true });
 
         device.on('error', function (err) {
           endCallUi('Phone error: ' + (err && err.message ? err.message : 'unknown') + (err && err.code ? ' (code ' + err.code + ')' : ''), true);
