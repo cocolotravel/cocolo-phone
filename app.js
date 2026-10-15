@@ -12,6 +12,14 @@
   var EDGES = ['ashburn', 'umatilla', 'dublin', 'frankfurt', 'sao-paulo', 'singapore', 'sydney', 'tokyo', 'roaming'];
   var edgeParam = (params.get('edge') || '').trim().toLowerCase();
 
+  // Our Twilio keys live in the default US region, and European or Asian edges reject them.
+  // Use a US edge: Oregon for browsers in Asia and the Pacific, Virginia everywhere else.
+  function defaultEdge() {
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { tz = ''; }
+    return /^(Asia|Australia|Pacific)\//.test(tz) ? 'umatilla' : 'ashburn';
+  }
+
   function $(id) { return document.getElementById(id); }
 
   var els = {
@@ -243,7 +251,7 @@
       })
       .then(function (data) {
         var deviceOptions = { codecPreferences: ['opus', 'pcmu'], closeProtection: true, logLevel: 'error', enableImprovedSignalingErrorPrecision: true };
-        if (EDGES.indexOf(edgeParam) !== -1) { deviceOptions.edge = edgeParam; }
+        deviceOptions.edge = (EDGES.indexOf(edgeParam) !== -1) ? edgeParam : defaultEdge();
         device = new Twilio.Device(data.token, deviceOptions);
 
         device.on('error', function (err) {
