@@ -8,6 +8,9 @@
 
   var params = new URLSearchParams(window.location.search);
   var ticket = (params.get('ticket') || '').trim();
+  // Optional, for troubleshooting only: ?edge=ashburn forces the Twilio edge location.
+  var EDGES = ['ashburn', 'umatilla', 'dublin', 'frankfurt', 'sao-paulo', 'singapore', 'sydney', 'tokyo', 'roaming'];
+  var edgeParam = (params.get('edge') || '').trim().toLowerCase();
 
   function $(id) { return document.getElementById(id); }
 
@@ -239,7 +242,9 @@
         return api('/softphone-token');
       })
       .then(function (data) {
-        device = new Twilio.Device(data.token, { codecPreferences: ['opus', 'pcmu'], closeProtection: true, logLevel: 'error', enableImprovedSignalingErrorPrecision: true });
+        var deviceOptions = { codecPreferences: ['opus', 'pcmu'], closeProtection: true, logLevel: 'error', enableImprovedSignalingErrorPrecision: true };
+        if (EDGES.indexOf(edgeParam) !== -1) { deviceOptions.edge = edgeParam; }
+        device = new Twilio.Device(data.token, deviceOptions);
 
         device.on('error', function (err) {
           endCallUi('Phone error: ' + (err && err.message ? err.message : 'unknown') + (err && err.code ? ' (code ' + err.code + ')' : ''), true);
